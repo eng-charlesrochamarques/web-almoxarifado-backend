@@ -1,4 +1,5 @@
 const Item = require("../models/item");
+const NotFoundError = require("../errors/not-found-error");
 
 function getItems(req, res, next) {
   Item.find({})
@@ -45,9 +46,7 @@ function updateItem(req, res, next) {
   })
     .then((item) => {
       if (!item) {
-        return res
-          .status(404)
-          .send({ message: `Item ${itemId} nao encontrado` });
+        return next(new NotFoundError(`Item ${itemId} nao encontrado`));
       }
 
       return res.send(item);
@@ -61,9 +60,7 @@ function deleteItem(req, res, next) {
   Item.findByIdAndDelete(itemId)
     .then((item) => {
       if (!item) {
-        return res
-          .status(404)
-          .send({ message: `Item ${itemId} nao encontrado` });
+        return next(new NotFoundError(`Item ${itemId} nao encontrado`));
       }
 
       return res.send({ message: "Item removido com sucesso" });
