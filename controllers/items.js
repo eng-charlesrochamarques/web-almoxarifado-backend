@@ -1,5 +1,6 @@
 const Item = require("../models/item");
 const NotFoundError = require("../errors/not-found-error");
+const BadRequestError = require("../errors/bad-request-error");
 
 function getItems(req, res, next) {
   Item.find({})
@@ -34,7 +35,13 @@ function createItem(req, res, next) {
     imageUrl,
   })
     .then((item) => res.status(201).send(item))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        return next(new BadRequestError("Dados invalidos para criar item"));
+      }
+
+      return next(err);
+    });
 }
 
 function updateItem(req, res, next) {
@@ -51,7 +58,13 @@ function updateItem(req, res, next) {
 
       return res.send(item);
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === "ValidationError" || err.name === "CastError") {
+        return next(new BadRequestError("Dados invalidos para atualizar item"));
+      }
+
+      return next(err);
+    });
 }
 
 function deleteItem(req, res, next) {
@@ -65,7 +78,13 @@ function deleteItem(req, res, next) {
 
       return res.send({ message: "Item removido com sucesso" });
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === "CastError") {
+        return next(new BadRequestError("ID de item invalido"));
+      }
+
+      return next(err);
+    });
 }
 
 module.exports = {
