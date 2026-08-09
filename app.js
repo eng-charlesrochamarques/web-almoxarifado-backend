@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { errors } = require("celebrate");
+
 const itemsRouter = require("./routes/items");
 const errorHandler = require("./middlewares/error-handler");
 const { PORT = 3000 } = process.env;
@@ -21,6 +23,8 @@ app.get("/", (req, res) => {
 app.use((req, res) => {
   res.status(404).send({ message: "Recurso solicitado nao encontrado" });
 });
+
+app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
