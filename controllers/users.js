@@ -39,7 +39,7 @@ function createUser(req, res, next) {
 
 function login(req, res, next) {
   const { email, password } = req.body;
-  const { JWT_SECRET = "dev-secret" } = process.env;
+  const { JWT_SECRET = "dev-secret-web-almoxarifado" } = process.env;
 
   User.findOne({ email })
     .select("+password")
