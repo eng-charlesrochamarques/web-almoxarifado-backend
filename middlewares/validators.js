@@ -49,9 +49,17 @@ const validateCreateUser = celebrate({
   }),
 });
 
+const validateLogin = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  }),
+});
+
 module.exports = {
   validateItemId,
   validateCreateItem,
   validateUpdateItem,
   validateCreateUser,
+  validateLogin,
 };
