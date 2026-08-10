@@ -16,7 +16,7 @@ function auth(req, res, next) {
 
   try {
     payload = jwt.verify(token, JWT_SECRET);
-  } catch (err) {
+  } catch {
     return next(new UnauthorizedError("Autorizacao necessaria"));
   }
 
