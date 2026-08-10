@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { errors } = require("celebrate");
+const auth = require("./middlewares/auth");
 
 const itemsRouter = require("./routes/items");
 const usersRouter = require("./routes/users");
@@ -19,12 +20,15 @@ app.use(express.json());
 
 app.post("/signin", validateLogin, login);
 
-app.use("/items", itemsRouter);
 app.use("/users", usersRouter);
 
 app.get("/", (req, res) => {
   res.send({ message: "Web Almoxarifado API" });
 });
+
+app.use(auth);
+
+app.use("/items", itemsRouter);
 
 app.use((req, res) => {
   res.status(404).send({ message: "Recurso solicitado nao encontrado" });
