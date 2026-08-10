@@ -1,6 +1,7 @@
 const Item = require("../models/item");
 const NotFoundError = require("../errors/not-found-error");
 const BadRequestError = require("../errors/bad-request-error");
+const ForbiddenError = require("../errors/forbidden-error");
 
 function getItems(req, res, next) {
   Item.find({})
@@ -33,6 +34,7 @@ function createItem(req, res, next) {
     lastPrice,
     currency,
     imageUrl,
+    owner: req.user._id,
   })
     .then((item) => res.status(201).send(item))
     .catch((err) => {
@@ -70,13 +72,21 @@ function updateItem(req, res, next) {
 function deleteItem(req, res, next) {
   const { itemId } = req.params;
 
-  Item.findByIdAndDelete(itemId)
+  Item.findById(itemId)
     .then((item) => {
       if (!item) {
         return next(new NotFoundError(`Item ${itemId} nao encontrado`));
       }
 
-      return res.send({ message: "Item removido com sucesso" });
+      if (item.owner.toString() !== req.user._id) {
+        return next(
+          new ForbiddenError("Voce nao pode excluir item de outro usuario"),
+        );
+      }
+
+      return Item.findByIdAndDelete(itemId).then(() =>
+        res.send({ message: "Item removido com sucesso" }),
+      );
     })
     .catch((err) => {
       if (err.name === "CastError") {

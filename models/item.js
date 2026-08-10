@@ -56,6 +56,11 @@ const itemSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "user",
+    },
   },
   {
     timestamps: true,
