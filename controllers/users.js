@@ -67,7 +67,20 @@ function login(req, res, next) {
     .catch(next);
 }
 
+function getCurrentUser(req, res, next) {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        return next(new UnauthorizedError("Usuario nao encontrado"));
+      }
+
+      return res.send(user);
+    })
+    .catch(next);
+}
+
 module.exports = {
   createUser,
   login,
+  getCurrentUser,
 };

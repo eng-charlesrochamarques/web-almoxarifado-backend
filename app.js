@@ -7,9 +7,12 @@ const { errors } = require("celebrate");
 const auth = require("./middlewares/auth");
 
 const itemsRouter = require("./routes/items");
-const usersRouter = require("./routes/users");
-const { login } = require("./controllers/users");
-const { validateLogin } = require("./middlewares/validators");
+
+const { login, createUser, getCurrentUser } = require("./controllers/users");
+const {
+  validateLogin,
+  validateCreateUser,
+} = require("./middlewares/validators");
 const errorHandler = require("./middlewares/error-handler");
 
 const {
@@ -25,8 +28,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/signin", validateLogin, login);
-
-app.use("/users", usersRouter);
+app.post("/signup", validateCreateUser, createUser);
 
 app.get("/", (req, res) => {
   res.send({ message: "Web Almoxarifado API" });
@@ -34,6 +36,7 @@ app.get("/", (req, res) => {
 
 app.use(auth);
 
+app.get("/users/me", getCurrentUser);
 app.use("/items", itemsRouter);
 
 app.use((req, res) => {
