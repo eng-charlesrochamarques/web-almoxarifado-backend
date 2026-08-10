@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { errors } = require("celebrate");
 const auth = require("./middlewares/auth");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const itemsRouter = require("./routes/items");
 
@@ -26,6 +27,7 @@ mongoose.connect(MONGO_URL);
 
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);
 
 app.post("/signin", validateLogin, login);
 app.post("/signup", validateCreateUser, createUser);
@@ -42,6 +44,8 @@ app.use("/items", itemsRouter);
 app.use((req, res) => {
   res.status(404).send({ message: "Recurso solicitado nao encontrado" });
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 app.use(errorHandler);
