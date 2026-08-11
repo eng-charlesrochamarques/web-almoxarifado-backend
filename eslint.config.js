@@ -17,6 +17,7 @@ module.exports = [
       "consistent-return": "off",
       "no-underscore-dangle": "off",
       "linebreak-style": "off",
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     },
   },
 ];
