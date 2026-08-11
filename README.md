@@ -249,19 +249,23 @@ Implementado nesta etapa:
 - Integracao protegida com a API da TME.
 - Logs de requisicoes e erros.
 
-Pendente para evolucao futura:
+Planejado para a Etapa 3:
 
-- Deploy final com HTTPS.
 - Conexao completa do front-end com o back-end.
+- Deploy full-stack com HTTPS.
+- Atualizacao do README com o dominio da API implantada.
+- Refatoracao do componente Search.jsx do front-end em componentes menores, conforme sugestao da revisao da Etapa 1.
 
 ## Deploy
 
-O deploy do backend sera feito em servidor com HTTPS, conforme exigencia da TripleTen.
+O deploy completo sera realizado na Etapa 3, quando o front-end for conectado ao back-end e a aplicacao full-stack for implantada em servidor com HTTPS.
+
+Nesta Etapa 2, o backend foi desenvolvido e testado localmente, com rotas protegidas, MongoDB, autenticacao JWT, logs e integracao segura com a API da TME.
 
 Dominio da API:
 
 ```text
-A ser adicionado apos implantacao.
+A ser adicionado na Etapa 3.
 ```
 
 ## Branch da etapa
