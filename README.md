@@ -2,7 +2,7 @@
 
 ## Descricao do projeto
 
-Web Almoxarifado Backend e a API do sistema Web Almoxarifado. Nesta etapa, o projeto implementa autenticacao, cadastro de usuarios, rotas protegidas com JWT e operacoes CRUD para itens do almoxarifado usando MongoDB.
+Web Almoxarifado Backend e a API do sistema Web Almoxarifado. Nesta etapa, o projeto implementa autenticacao, cadastro de usuarios, rotas protegidas com JWT, operacoes CRUD para itens do almoxarifado usando MongoDB e consulta protegida a API da TME.
 
 O backend foi desenvolvido para a Etapa 2 do projeto final da TripleTen: aplicacao full-stack com Node.js, Express e MongoDB.
 
@@ -17,6 +17,7 @@ O backend foi desenvolvido para a Etapa 2 do projeto final da TripleTen: aplicac
 - Exclusao de itens.
 - Protecao das rotas de itens com autenticacao.
 - Bloqueio para impedir que um usuario exclua itens criados por outro usuario.
+- Consulta protegida a API da TME pelo backend.
 - Validacao de dados com Celebrate/Joi.
 - Tratamento centralizado de erros.
 - Logs de requisicoes e erros com Winston.
@@ -36,6 +37,7 @@ O backend foi desenvolvido para a Etapa 2 do projeto final da TripleTen: aplicac
 - winston
 - express-winston
 - ESLint
+- TME API
 
 ## Rotas da API
 
@@ -125,6 +127,37 @@ Atualiza um item existente.
 
 Remove um item existente. Apenas o usuario que criou o item pode remove-lo.
 
+#### GET /api/suppliers/tme/search
+
+Consulta a API da TME usando credenciais protegidas no backend.
+
+Exemplo:
+
+```text
+GET /api/suppliers/tme/search?query=NE555
+```
+
+Resposta esperada:
+
+```json
+{
+  "items": [
+    {
+      "id": "tme-NE555P",
+      "imageUrl": "",
+      "supplier": "TME",
+      "manufacturer": "Texas Instruments",
+      "manufacturerPartNumber": "NE555P",
+      "description": "Timer NE555",
+      "availability": 100,
+      "unitPrice": 0.32,
+      "currency": "EUR",
+      "productUrl": "https://www.tme.eu/..."
+    }
+  ]
+}
+```
+
 ## Codigos de erro
 
 - `400` - Dados invalidos.
@@ -142,9 +175,14 @@ Crie um arquivo `.env` na raiz do projeto com base em `.env.example`.
 PORT=3000
 MONGO_URL=mongodb://127.0.0.1:27017/web-almoxarifado
 JWT_SECRET=replace-this-secret
+TME_TOKEN=replace-this-token
+TME_APPLICATION_SECRET=replace-this-secret
+TME_COUNTRY=DE
+TME_LANGUAGE=EN
+TME_CURRENCY=EUR
 ```
 
-O arquivo `.env` nao deve ser enviado ao GitHub.
+O arquivo `.env` nao deve ser enviado ao GitHub. As credenciais reais da TME devem ficar apenas em variaveis de ambiente no servidor.
 
 ## Como executar localmente
 
@@ -196,6 +234,25 @@ logs/error.log
 ```
 
 A pasta `logs/` e ignorada pelo Git.
+
+## Status da Etapa 2
+
+Implementado nesta etapa:
+
+- Back-end com Node.js e Express.
+- Banco de dados MongoDB.
+- Modelos de usuario e itens do almoxarifado.
+- CRUD real de itens conectado ao banco de dados.
+- Cadastro e login de usuario com JWT.
+- Rotas protegidas por autenticacao.
+- Variaveis de ambiente para configuracoes sensiveis.
+- Integracao protegida com a API da TME.
+- Logs de requisicoes e erros.
+
+Pendente para evolucao futura:
+
+- Deploy final com HTTPS.
+- Conexao completa do front-end com o back-end.
 
 ## Deploy
 
