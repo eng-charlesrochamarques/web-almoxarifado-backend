@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const auth = require("../middlewares/auth");
 const itemsRouter = require("./items");
+const suppliersRouter = require("./suppliers");
 
 const { login, createUser, getCurrentUser } = require("../controllers/users");
 const {
@@ -20,5 +21,6 @@ router.use(auth);
 
 router.get("/users/me", getCurrentUser);
 router.use("/items", itemsRouter);
+router.use("/api/suppliers", suppliersRouter);
 
 module.exports = router;
