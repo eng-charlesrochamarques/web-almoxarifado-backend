@@ -252,12 +252,18 @@ Implementado no projeto:
 
 ## Deploy
 
-O deploy completo sera realizado com front-end e back-end acessiveis por dominio, conforme orientacao da TripleTen para a etapa final.
+O deploy completo foi realizado com front-end e back-end acessiveis por dominio com HTTPS, conforme orientacao da TripleTen para a etapa final.
 
 Dominio da API:
 
 ```text
-A ser adicionado na Etapa 3.
+https://api.web-almoxarifado.mooo.com
+```
+
+Dominio do front-end:
+
+```text
+https://web-almoxarifado.mooo.com
 ```
 
 ## Branch da etapa final
