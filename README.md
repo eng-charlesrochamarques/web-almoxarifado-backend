@@ -2,9 +2,9 @@
 
 ## Descricao do projeto
 
-Web Almoxarifado Backend e a API do sistema Web Almoxarifado. Nesta etapa, o projeto implementa autenticacao, cadastro de usuarios, rotas protegidas com JWT, operacoes CRUD para itens do almoxarifado usando MongoDB e consulta protegida a API da TME.
+Web Almoxarifado Backend e a API do sistema Web Almoxarifado. O projeto implementa autenticacao, cadastro de usuarios, rotas protegidas com JWT, operacoes CRUD para itens do almoxarifado usando MongoDB e consulta protegida a API da TME.
 
-O backend foi desenvolvido para a Etapa 2 do projeto final da TripleTen: aplicacao full-stack com Node.js, Express e MongoDB.
+O backend foi desenvolvido para o projeto final da TripleTen e, na Etapa Final, e conectado ao front-end em React para formar a aplicacao full-stack.
 
 ## Funcionalidades
 
@@ -235,9 +235,9 @@ logs/error.log
 
 A pasta `logs/` e ignorada pelo Git.
 
-## Status da Etapa 2
+## Status da Etapa Final
 
-Implementado nesta etapa:
+Implementado no projeto:
 
 - Back-end com Node.js e Express.
 - Banco de dados MongoDB.
@@ -248,28 +248,26 @@ Implementado nesta etapa:
 - Variaveis de ambiente para configuracoes sensiveis.
 - Integracao protegida com a API da TME.
 - Logs de requisicoes e erros.
-
-Planejado para a Etapa 3:
-
-- Conexao completa do front-end com o back-end.
-- Deploy full-stack com HTTPS.
-- Atualizacao do README com o dominio da API implantada.
-- Refatoracao do componente Search.jsx do front-end em componentes menores, conforme sugestao da revisao da Etapa 1.
+- Conexao com o front-end React.
 
 ## Deploy
 
-O deploy completo sera realizado na Etapa 3, quando o front-end for conectado ao back-end e a aplicacao full-stack for implantada em servidor com HTTPS.
-
-Nesta Etapa 2, o backend foi desenvolvido e testado localmente, com rotas protegidas, MongoDB, autenticacao JWT, logs e integracao segura com a API da TME.
+O deploy completo foi realizado com front-end e back-end acessiveis por dominio com HTTPS, conforme orientacao da TripleTen para a etapa final.
 
 Dominio da API:
 
 ```text
-A ser adicionado na Etapa 3.
+https://api.web-almoxarifado.mooo.com
 ```
 
-## Branch da etapa
+Dominio do front-end:
 
 ```text
-stage-backend
+https://web-almoxarifado.mooo.com
+```
+
+## Branch da etapa final
+
+```text
+stage-final
 ```
